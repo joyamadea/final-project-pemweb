@@ -1,7 +1,7 @@
 # FINAL PROJECT PEMWEB
 
-Untuk melakukan apa" ke repository ini, lakukan git clone terlebih dahulu
-git clone <url>
+Untuk melakukan apa" ke repository ini, lakukan git clone terlebih dahulu:
+git clone [input url]
 
 ### Buat update project:
 git pull
