@@ -3,6 +3,14 @@
 Untuk melakukan apa" ke repository ini, lakukan git clone terlebih dahulu:
 git clone [input url]
 
+Tolong kerjanya di branch tryout:
+git checkout -b tryout
+(kalau tidak bisa tolong tanya)
+
+
+git branch
+// untuk ngecek bener di branch tryout atau belum
+
 ### Buat update project:
 git pull
 
