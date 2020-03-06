@@ -2,6 +2,7 @@
 
 Untuk melakukan apa" ke repository ini, lakukan git clone terlebih dahulu:
 git clone [input url]
+//test
 
 ### Buat update project:
 git pull
