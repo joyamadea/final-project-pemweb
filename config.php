@@ -3,6 +3,8 @@
 	$username = "root";
 	$dbname ="customer";
 	$password = "";
-    $db = mysqli_connect($host, $username, $password, $dbname);
+	$db = mysqli_connect($host, $username, $password, $dbname);
+	
+	//just a comment
     
 ?>
