@@ -4,5 +4,6 @@
 	$dbname ="customer";
 	$password = "";
 	$db = mysqli_connect($host, $username, $password, $dbname);
-    
+	
+	//this is a comment
 ?>
