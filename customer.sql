@@ -35,6 +35,12 @@ CREATE TABLE comment(
   FOREIGN KEY (post_id) REFERENCES post(post_id)
  )engine=InnoDB;
 
+ INSERT INTO users
+ VALUES('joyamadea','joya8858@gmail.com','cb7b04acc483b9fb99973d374edd3e90','Joy',NULL,'1999-12-15','F','images/profile/uwu.jpg',NULL);
+
+ INSERT INTO post
+ VALUES('post5e676c','joyamadea','hello my name is uyu','images/posts/uyu.png')
+
   
 
  
