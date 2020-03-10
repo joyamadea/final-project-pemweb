@@ -1,8 +1,9 @@
 <?php
     $host = "localhost";
-	$username = "root";
+	$uname = "root";
 	$dbname ="customer";
 	$password = "";
-	$db = mysqli_connect($host, $username, $password, $dbname);
-    
+	$db = mysqli_connect($host, $uname, $password, $dbname);
+	
+	//this is a comment
 ?>
