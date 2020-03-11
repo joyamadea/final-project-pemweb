@@ -5,6 +5,7 @@
     $query = "SELECT * FROM users WHERE username='$username'";
     $result = $db->query($query) or die($db->error);
 
+    //fetching to variables
     while($row = $result->fetch_assoc()){
         $image=$row['profile_pic'];
         $bio=$row['bio'];
@@ -12,10 +13,6 @@
         $lastName=$row['last_name'];
         $email=$row['email'];
     }
-
-    
-
-
 ?>
 
 <!DOCTYPE html>

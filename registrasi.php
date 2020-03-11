@@ -3,9 +3,9 @@ require 'functions.php';
 
 if (isset($_POST["register"])) {
 	if (registrasi($_POST) > 0) {
-		echo "<script>
-					alert('User berhasil ditambahkan!');
-			</script>";
+		// echo "<script>
+		// 			alert('User berhasil ditambahkan!');
+		// 	</script>";
 	} else {
 		echo mysqli_error($conn);
 	}
@@ -66,14 +66,6 @@ if (isset($_POST["register"])) {
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
 						</select>
-					</div>
-					<div class="form-group">
-						<label for="profpic">Profile Picture :</label>
-						<input type="text" class="form-control" name="profpic" id="profpic" required>
-					</div>
-					<div class="form-group">
-						<label for="bio">Bio :</label>
-						<input type="text" class="form-control" name="bio" id="bio">
 					</div>
 					<div class="form-group">
 						<label for="password">Password :</label>

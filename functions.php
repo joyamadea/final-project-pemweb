@@ -10,8 +10,8 @@ function registrasi($data){
 	$last_name = $data["last_name"];
 	$dob = $data["dob"];
 	$gender = $data["gender"];
-	$profpic = $data['profpic'];
-	$bio = $data["bio"];
+	$profpic = null;
+	$bio = null;
 	$password = mysqli_real_escape_string($conn, $data["password"]);
 	$confirm = mysqli_real_escape_string($conn, $data["confirm"]);
 
@@ -26,7 +26,7 @@ function registrasi($data){
 	$password = password_hash($password, PASSWORD_DEFAULT);
 
 	// tambah user ke database
-	mysqli_query($conn, "INSERT INTO users VALUES('$username', '$email','$first_name', '$last_name', '$dob', '$gender','$profpic','$bio',  '$password')");
+	mysqli_query($conn, "INSERT INTO users VALUES('$username', '$email','$password','$first_name', '$last_name', '$dob', '$gender','$profpic','$bio')");
 
 	return mysqli_affected_rows($conn);
 }
