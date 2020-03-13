@@ -3,6 +3,17 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <?php 
+        if(isset($_GET['pesan'])){
+	        if($_GET['pesan'] == "gagal"){
+		        alert "Login gagal! Username dan password salah!";
+	        }else if($_GET['pesan'] == "logout"){
+		        alert "Anda telah berhasil logout";
+	        }else if($_GET['pesan'] == "belum_login"){
+		        alert "Anda harus login untuk mengakses halaman admin";
+	        }
+        }
+    ?>
 </head>
 <body>
     </br>
