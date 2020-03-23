@@ -57,11 +57,12 @@
 		if($error==false){
 			// enkripsi password
 			$password = md5($_POST["password"]);
-			$message="Succesfull register! Redirecting to login page...";
+			$message="Succesful register! Redirecting to login page...";
 			// tambah user ke database
-			mysqli_query($conn, "INSERT INTO users VALUES('$username', '$email','$password','$first_name', '$last_name', '$dob', '$gender',$profpic,$bio)");
-
-			header("refresh:3;url=login.php");
+			$query="INSERT INTO users VALUES('$username', '$email','$password','$first_name', '$last_name', '$dob', '$gender','$profpic','$bio')";
+			$result=$conn->query($query);
+			echo var_dump($result);
+			//header("refresh:3;url=login.php");
 		}
 	}
 
