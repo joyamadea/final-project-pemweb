@@ -2,20 +2,13 @@
     include_once("config.php");
 
     session_start();
-
-    $sessionname=$_SESSION['username'];
-    $username=$_GET['username'];
-    $query = "SELECT * FROM users WHERE username='$username'";
-    $result = $db->query($query) or die($db->error);
-
-    //fetching to variables
-    while($row = $result->fetch_assoc()){
-        $image=$row['profile_pic'];
-        $bio=$row['bio'];
-        $firstName=$row['first_name'];
-        $lastName=$row['last_name'];
-        $email=$row['email'];
+    if($_SESSION['loggedin']){
+        $name=$_SESSION['username'];
     }
+    else{
+        header("location: login.php");
+    }
+    
 
 ?>
 
@@ -43,11 +36,11 @@
             </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="home.php">Home </a>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item  active">
-                <a class="nav-link" href="#">Profile<span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="user.php?username=<?php echo $name?>">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="logout.php">Logout</a>
@@ -57,28 +50,18 @@
     </nav>
     <div class="container">
         
-        <div class="row justify-content-center">
-            <img src="<?php echo $image;?>" width="100px"style="border-radius: 100px;margin:10px;">
-        </div>
-        <div class="row justify-content-center">
-            <h3 style="text-align:center;"><?php echo $firstName." ".$lastName?></h3>
-        </div>
-        <div class="row justify-content-center">
-            <p style="text-align:center;"><?php echo $email?><br>
-                
-        </div>
+        
 
         <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
-                <form action="add.php?username=<?php echo $username ?>" method="post" enctype="multipart/form-data">
+                <form action="add.php?username=<?php echo $name ?>" method="post" enctype="multipart/form-data">
                     <label>New Post</label>
                     <!-- <div class="custom-file mb-2">
                         <input type="file" class="custom-file-input" id="uploadFile " name="uploadFile">
                         <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                     </div> -->
-                    
-                    
+                                 
                     <input type="text" class="form-control mb-2" name="caption">
                     <input type="file" id="uploadFile " name="uploadFile">
                     <input type="submit" class="btn btn-primary mb-2" name='Submit' value="Post">
@@ -90,7 +73,7 @@
         <div class="row justify-content-center">
             
             <?php 
-                $query2="SELECT * FROM post WHERE username='$username'";
+                $query2="SELECT * FROM post ORDER BY post_id DESC";
                 $result2=$db->query($query2) or die($db->error);
             
                 while($row1=$result2->fetch_assoc()){
@@ -103,12 +86,12 @@
                         
                         echo "<div class='card-body'>";
                             echo "<div class='card-title'>";
-                            echo "<a href='user.php?username=$uname'>".$uname."</a>";
-                                if($uname==$sessionname){
+                                echo "<a href='user.php?username=$uname'>".$uname."</a>";
+                                if($uname==$name){
                                     echo "<button type='button' class='btn btn-danger float-right' data-toggle='modal' data-target='#delete'><i class='fa fa-trash'></i></button>";
-                                } 
+                                }       
                                 echo "</div>";                                  
-                            echo "<img src='".$picture."'/ width='500px;' class='img-fluid'>";
+                            echo "<img src='".$picture."'/ width='600px;' class='img-fluid'>";
                             echo "<p>".$caption."</p>";
                         echo "</div>";
                     echo "</div>";
@@ -131,7 +114,6 @@
             <div class="modal-body">
                 <form action="delete.php">
                     <input type="hidden" name="idofpost" value="<?php echo $post_id; ?>">  
-                    <input type="hidden" name="userofpost" value="<?php echo $username; ?>">  
                 <div class="alert alert-danger">Are you sure you want delete this post?</div>
             </div>    
             <div class="modal-footer">

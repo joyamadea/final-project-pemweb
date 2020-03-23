@@ -1,5 +1,6 @@
 <?php
     if(isset($_POST['Submit'])){
+        include_once("config.php");
 
         $target_dir = "images/posts/";
         $target_file = $target_dir . basename($_FILES["uploadFile"]["name"]);
@@ -12,12 +13,15 @@
         $username=$_GET['username'];
         $post_id=uniqid('post');
          
+        if(empty($teks)){
+            $query = "INSERT INTO post VALUES('$post_id','$username',null,'$gambar')";
+        }
+        else{
+            $query = "INSERT INTO post VALUES('$post_id','$username','$teks','$gambar')";
+        }
 
-        include_once("config.php");
-    
-        $query = "INSERT INTO post VALUES('$post_id','$username','$teks','$gambar')";
         $result = $db->query($query);
-        
+        echo var_dump($query);
         if(move_uploaded_file($_FILES["uploadFile"]["tmp_name"],$target_file)){
             //
         }
@@ -25,7 +29,7 @@
             //echo "hello";
         }
         
-        header("Location: user.php?username=$username");
+        header("Location: home.php");
         
     }
 
