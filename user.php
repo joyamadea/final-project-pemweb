@@ -108,7 +108,7 @@
                                     echo "<button type='button' class='btn btn-danger float-right' data-toggle='modal' data-target='#delete'><i class='fa fa-trash'></i></button>";
                                 } 
                                 echo "</div>";                                  
-                            echo "<img src='".$picture."'/ width='500px;' class='img-fluid'>";
+                            echo "<img src='".$picture."'/ width='600px;' class='img-fluid'>";
                             echo "<p>".$caption."</p>";
                         echo "</div>";
                     echo "</div>";
