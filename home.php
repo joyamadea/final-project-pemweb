@@ -2,7 +2,7 @@
     include_once("config.php");
 
     session_start();
-    if($_SESSION['loggedin']){
+    if($_SESSION['loggedin']==true){
         $name=$_SESSION['username'];
     }
     else{

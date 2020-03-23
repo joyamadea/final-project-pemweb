@@ -49,44 +49,39 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="styles.css"/>
 
 
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-            <li class="nav-item ">
-                <a class="nav-link" href="register.php">Register</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="">Login  <span class="sr-only">(current)</span></a>
-            </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container mt-5 mb-5">
-        <form class="form-group" method="post" action="login.php">
-            <label for="username">Username</label>
-            <input type="text" placeholder="Username" class="form-control" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username']:'';?>">
+<body style="background:url(https://gradients.design/public/uploads/files/db7.png)">
+    
+    <div class="modal-dialog modal-dialog-centered mt-5	mb-5" style="border:0px;">
+        <div class="modal-content" style="background-color: #f9f9f9;">
+            <div class="modal-header">
+				<h1 class="modal-title col-12 text-center">Login</h1>
+			</div>
+            <div class="modal-body">
+                <form class="form-group" method="post" action="login.php">
+                    <div class="form-group">
+                        <input type="text" placeholder="Username" class="form-control" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username']:'';?>">
+                    </div>
+                    
+                    <input type="password" placeholder="Password" class="form-control" name="password">
 
-            <label for="password" class="mt-2">Password</label>
-            <input type="password" placeholder="Password" class="form-control" name="password">
+                    <p style="color:red;"><?php echo $error?></p>
 
-            <p style="color:red;"><?php echo $error?></p>
-
-            <div>
-                <button class="btn btn-info" name="login">Log In</button>
-                <div style="color:grey;" class="mt-2">Don't have an account? 
-                <a href="register.php">Register</a></div>
+                    <div class="form-group col-12 text-center">
+						<button type="submit" class="btn btn-2" name="login"><strong>Login</strong></button>
+					</div>
+                    
+                </form>
             </div>
-            
-        </form>
+
+            <div class="modal-footer">
+				<div style="color:grey;" class="col-12 text-center">Don't have an account?  
+                <a href="register.php">Register</a></div>
+			</div>
+        </div>
     </div>
 </body>
 </html>
