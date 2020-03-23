@@ -5,27 +5,26 @@
     if(isset($_POST['login'])){
         $username=$_POST['username'];
         $password=$_POST['password'];
+        
 
         if(empty($username) || empty($password)){
             $error="Username or password do not match";
         }
         else{
             $password=md5($password);
-            $query=$db->prepare("SELECT username, role FROM user WHERE username=? AND password=?");
+            $query=$db->prepare("SELECT username FROM users WHERE username=? AND password=?");
             //echo var_dump($query);
             $query->bind_param("ss",$username,$password);
             $query->execute();
-            $query->bind_result($username,$role);
+            $query->bind_result($username);
             $query->store_result();
             if($query->num_rows==1){
                 if($query->fetch()){
                     session_start();
-                    $_SESSION['role']=$role;
-                    //echo $_SESSION['role'];
                     $_SESSION['username']=$username;
                     $_SESSION['loggedin']=true;
                     
-                    header("location: homepage.php");
+                    header("location: home.php");
                 }
             }
             else{
@@ -56,7 +55,7 @@
 </head>
 <body>
     <div class="container mt-5 mb-5">
-        <form class="form-group" method="post" action="">
+        <form class="form-group" method="post" action="login.php">
             <label for="username">Username</label>
             <input type="text" placeholder="Username" class="form-control" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username']:'';?>">
 

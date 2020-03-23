@@ -23,7 +23,7 @@ function registrasi($data){
 		return false;
 	}
 	// enkripsi password
-	$password = password_hash($password, PASSWORD_DEFAULT);
+	$password = md5($password);
 
 	// tambah user ke database
 	mysqli_query($conn, "INSERT INTO users VALUES('$username', '$email','$password','$first_name', '$last_name', '$dob', '$gender','$profpic','$bio')");
