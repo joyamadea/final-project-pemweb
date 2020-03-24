@@ -1,4 +1,5 @@
 <?php
+    $errorFiletype="";
     if(isset($_POST['Submit'])){
         include_once("config.php");
 
@@ -10,24 +11,27 @@
         
         $gambar=$target_file;
         $teks=htmlentities($_POST['caption']);
-        $username=$_GET['username'];
         $post_id=uniqid('post');
+        $uploadOk=1;
          
-        if(empty($teks)){
-            $query = "INSERT INTO post VALUES('$post_id','$username',null,'$gambar')";
-        }
-        else{
-            $query = "INSERT INTO post VALUES('$post_id','$username','$teks','$gambar')";
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ){
+            $uploadOk=0;
+            $errorFiletype="Only JPG, JPEG, PNG & GIF files are allowed";
         }
 
-        $result = $db->query($query);
-       // echo var_dump($query);
-        if(move_uploaded_file($_FILES["uploadFile"]["tmp_name"],$target_file)){
-            //
+        if(empty($teks)&&$uploadOk==1){
+            $query = "INSERT INTO post VALUES('$post_id','$name',null,'$gambar')";
+            move_uploaded_file($_FILES["uploadFile"]["tmp_name"],$target_file);
+            $result = $db->query($query);
         }
-        else{
-            //echo "hello";
+        else if($uploadOk==1){
+            $query = "INSERT INTO post VALUES('$post_id','$name','$teks','$gambar')";
+            move_uploaded_file($_FILES["uploadFile"]["tmp_name"],$target_file);
+            $result = $db->query($query);
         }
+
+
         
         header("Location: home.php");
         
@@ -40,28 +44,32 @@
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
+        $uploadOk=1;
         $bio=$_POST['bio'];
         $username=$_GET['username'];
 
-        if(isset($bio) && $target_file!=$target_dir){
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ){
+            $uploadOk=0;
+            $errorFiletype="Only JPG, JPEG, PNG & GIF files are allowed";
+        }
+
+        if(isset($bio) && $target_file!=$target_dir &&$uploadOk==1){
             $query = "UPDATE users SET profile_pic='$target_file', bio='$bio' WHERE username='$username'";
+            move_uploaded_file($_FILES["uploadFile1"]["tmp_name"],$target_file);
+            $result = $db->query($query);
         }
-        else if(isset($bio)){
+        else if(isset($bio) &&$uploadOk==1){
             $query = "UPDATE users SET bio='$bio' WHERE username='$username'";
+            move_uploaded_file($_FILES["uploadFile1"]["tmp_name"],$target_file);
+            $result = $db->query($query);
         }
-        else if(isset($_FILES["uploadFile1"]["name"])){
+        else if(isset($_FILES["uploadFile1"]["name"])&&$uploadOk==1){
             $query = "UPDATE users SET profile_pic='$target_file' WHERE username='$username'";
+            move_uploaded_file($_FILES["uploadFile1"]["tmp_name"],$target_file);
+            $result = $db->query($query);
         }
 
-        $result = $db->query($query);
-        echo $query;
-
-        if(move_uploaded_file($_FILES["uploadFile1"]["tmp_name"],$target_file)){
-            //
-        }
-        else{
-            //echo "hello";
-        }
         
        header("Location: user.php?username=$username");
         

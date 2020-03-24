@@ -30,7 +30,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -55,12 +55,14 @@
         <div class="row justify-content-center">
             <div class="card mt-5">
                 <div class="card-body">
-                <form action="add.php?username=<?php echo $name ?>" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <?php require("add.php")?>
                     <label>New Post</label>
-                                 
+
                     <textarea name='caption' class='form-control' rows='1'></textarea>
                     <input type="file" id="uploadFile " name="uploadFile">
                     <input type="submit" class="btn btn-primary mb-2" name='Submit' value="Post">
+                    <p><?php echo $errorFiletype?></p>
                 </form>   
                 </div>
             </div>   
@@ -100,7 +102,7 @@
                                 echo "<a href='user.php?username=$uname'>".$uname."</a>";
                                 if($uname==$name){
                                     echo "<a class='btn btn-danger float-right' href='delete.php?id=".$post_id."&image=".$picture."' 
-                            onclick='return confirm(\"Are you sure you want to delete this post?\")'><i class='fa fa-trash'></i> Delete</a></td>";
+                            onclick='return confirm(\"Are you sure you want to delete this post?\")'><i class='fa fa-trash'></i></a></td>";
                                     //echo "<button type='button' class='btn btn-danger float-right' data-toggle='modal' data-target='#delete'><i class='fa fa-trash'></i></button>";
                                 }       
                                 echo "</div>";                                  
@@ -108,12 +110,20 @@
                             echo "<p class='card-text mt-3'>".$caption."</p>";
                         echo "</div>";
                             echo "<ul class='list-group list-group-flush'>";
-                                echo "<li class='list-group-item'>";
-                                    echo "<form class='clearfix' action='comment.php?post_id=".$post_id."' method='post' id='comment_form'>
-                                    <textarea name='comment_text' id='comment_text' class='form-control' rows='1'></textarea>
-                                    <button class='btn btn-primary btn-sm pull-right' name='submit_comment'>Submit comment</button>
-                                    </form>";
-                                echo "</li>";
+                            echo "<li class='list-group-item'>";
+                            echo "<form class='clearfix' action='comment.php?post_id=".$post_id."' method='post' id='comment_form'>
+                            <div class='row'>
+                            <div class='col'>
+                                <textarea name='comment_text' id='comment_text' class='form-control' rows='1'></textarea>
+                            </div>
+                            <div class='col-3'>
+                                <button class='btn btn-primary' name='submit_comment'>Comment</button>
+                            </div>
+                            </div>
+                            
+                            
+                            </form>";
+                        echo "</li>";
                                 
                                 $query3="SELECT * FROM comment WHERE post_id='$post_id' ORDER BY comm_id";
                                 $result3=$db->query($query3) or die($db->error);

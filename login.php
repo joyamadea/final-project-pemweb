@@ -95,7 +95,7 @@
                             </form>
 
                             <form action=" <?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                                <input type="submit" value="Refresh Captcha">
+                                <input type="submit" class="btn btn-1 mt-2" value="Refresh Captcha">
                             </form>
                         </div>
                         

@@ -149,7 +149,7 @@
                         echo "<a href='user.php?username=$uname'>".$uname."</a>";
                                 if($uname==$sessionname){
                                     echo "<a class='btn btn-danger float-right' href='delete.php?id=".$row1['post_id']."&image=".$row1['gambar']."' 
-                            onclick='return confirm(\"Are you sure you want to delete this post?\")'><i class='fa fa-trash'></i> Delete</a></td>";
+                            onclick='return confirm(\"Are you sure you want to delete this post?\")'><i class='fa fa-trash'></i></a></td>";
                                     //echo "<button type='button' class='btn btn-danger float-right' data-toggle='modal' data-target='#delete'><i class='fa fa-trash'></i></button>";
                                 } 
                                 echo "</div>";                                  
@@ -157,6 +157,20 @@
                             echo "<p class='mt-3'>".$caption."</p>";
                         echo "</div>";
                         echo "<ul class='list-group list-group-flush'>";
+                        echo "<li class='list-group-item'>";
+                                    echo "<form class='clearfix' action='comment.php?post_id=".$post_id."' method='post' id='comment_form'>
+                                    <div class='row'>
+                                    <div class='col'>
+                                        <textarea name='comment_text' id='comment_text' class='form-control' rows='1'></textarea>
+                                    </div>
+                                    <div class='col-3'>
+                                        <button class='btn btn-primary' name='submit_comment'>Comment</button>
+                                    </div>
+                                    </div>
+                                    
+                                    
+                                    </form>";
+                                echo "</li>";
                                 
                                 $query3="SELECT * FROM comment WHERE post_id='$post_id' ORDER BY comm_id";
                                 $result3=$db->query($query3) or die($db->error);

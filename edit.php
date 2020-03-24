@@ -49,7 +49,11 @@
 			<div class="modal-body">
 				<form action="add.php?username=<?php echo $username?>" method="post" enctype="multipart/form-data">
                     <div class="row justify-content-center">
-                    <img src="<?php if(empty($image)){ echo "images/profile/profile.png";}else{echo $image; }?>" class="text-center" width="100px" style="border-radius: 100px;margin:10px; text-align:right;" >
+                    <img src="<?php if(empty($image)){ echo "images/profile/profile.png";}else{echo $image; }?>" class="text-center"  style='width:100px;
+                            height:100px;
+                            object-fit:cover;
+                            border-radius: 100px;
+                            margin-right:13px;' >
                     </div>
                     <div class="form-group row justify-content-center">
                         
