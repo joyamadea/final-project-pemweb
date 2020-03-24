@@ -1,12 +1,15 @@
 <?php
     include_once("config.php");
-
+    session_start();
+    $_SESSION['count'] = time();
+    $image;
     $error=" ";
-    if(isset($_POST['login'])){
+    $flag = 5;
+    if(isset($_POST['login']) && isset($_POST["flag"])){
         $username=$_POST['username'];
         $password=$_POST['password'];
-        
-
+        $input = $_POST["input"];
+        $flag = $_POST["flag"];
         if(empty($username) || empty($password)){
             $error="Username or password do not match";
         }
@@ -18,8 +21,8 @@
             $query->execute();
             $query->bind_result($username);
             $query->store_result();
-            if($query->num_rows==1){
-                if($query->fetch()){
+            if($query->num_rows==1 && $flag == 1){
+                if($query->fetch() && $input == $_SESSION['captcha_string']){
                     session_start();
                     $_SESSION['username']=$username;
                     $_SESSION['loggedin']=true;
@@ -29,6 +32,8 @@
             }
             else{
                 $error="Username or password do not match";
+                create_image();
+                display();
             }
             $query->close();
         }
@@ -73,7 +78,67 @@
                     <div class="form-group col-12 text-center">
 						<button type="submit" class="btn btn-2" name="login"><strong>Login</strong></button>
 					</div>
-                    
+                    <!-- Captcha Form -->
+                    <?php                      
+                    create_image();
+                    display();
+                    ?>
+                    <?php
+                    function display()
+                    {
+                    ?>
+                        <div style="text-align:center;">
+                            <div style="display:block;margin-bottom:20px;margin-top:20px;">
+                                <img src="image<?php echo $_SESSION['count'] ?>.png">
+                            </div>
+                            <form action=" <?php echo $_SERVER['PHP_SELF']; ?>" method="POST"
+                            / >
+                            <input type="text" name="input"/>
+                            <input type="hidden" name="flag" value="1"/>
+                            </form>
+
+                            <form action=" <?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                                <input type="submit" value="Refresh Captcha">
+                            </form>
+                        </div>
+                    <?php
+                    }
+                    function  create_image()
+                    {
+                        global $image;
+                        $image = imagecreatetruecolor(140, 50) or die("Cannot Initialize new GD image stream");
+
+                        $background_color = imagecolorallocate($image, 255, 255, 255);
+                        $text_color = imagecolorallocate($image, 0, 255, 255);
+                        $pixel_color = imagecolorallocate($image, rand(0,255), rand(0,255), rand(0,255));
+
+                        imagefilledrectangle($image, 0, 0, 140, 50, $background_color);
+
+                        for ($i = 0; $i < 1000; $i++) {
+                            imagesetpixel($image, rand() % 140, rand() % 50, $pixel_color);
+                        }
+
+                        $letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
+                        $len = strlen($letters);
+                        $letter = $letters[rand(0, $len - 1)];
+
+                        $text_color = imagecolorallocate($image, 0, 0, 0);
+                        $word = "";
+                        for ($i = 0; $i < 5; $i++) {
+                            $letter = $letters[rand(0, $len - 1)];
+                            imagestring($image, 7, 5 + ($i * 30), 20, $letter, $text_color);
+                            $word .= $letter;
+                        }
+                        $_SESSION['captcha_string'] = $word;
+
+                        $images = glob("*.png");
+                        foreach ($images as $image_to_delete) {
+                            @unlink($image_to_delete);
+                        }
+                        imagepng($image, "image" . $_SESSION['count'] . ".png");
+                    }
+                    ?>
+                    <!-- Captcha Form -->
                 </form>
             </div>
 
