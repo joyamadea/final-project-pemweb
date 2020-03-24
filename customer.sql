@@ -15,7 +15,7 @@ CREATE TABLE users (
 ) ENGINE=InnoDB;
 
 CREATE TABLE post(
-  post_id varchar (10) NOT NULL,
+  post_id varchar (20) NOT NULL,
   username varchar(50) NOT NULL,
   teks varchar(600),
   gambar varchar(200) NOT NULL,
@@ -25,9 +25,9 @@ CREATE TABLE post(
 )engine=InnoDB;
 
 CREATE TABLE comment(
-  comm_id varchar(10) NOT NULL,
-  username varchar(10) NOT NULL,
-  post_id varchar(10) NOT NULL,
+  comm_id varchar(20) NOT NULL,
+  username varchar(50) NOT NULL,
+  post_id varchar(20) NOT NULL,
   comment varchar(600) NOT NULL,
 
   PRIMARY KEY (comm_id,username,post_id),
