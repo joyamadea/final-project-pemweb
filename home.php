@@ -1,6 +1,6 @@
 <?php
     include_once("config.php");
-    include('functions.php');
+
     session_start();
     if($_SESSION['loggedin']==true){
         $name=$_SESSION['username'];
@@ -17,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    <title>Home</title>
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -53,16 +53,12 @@
         
 
         <div class="row justify-content-center">
-            <div class="card">
+            <div class="card mt-5">
                 <div class="card-body">
                 <form action="add.php?username=<?php echo $name ?>" method="post" enctype="multipart/form-data">
                     <label>New Post</label>
-                    <!-- <div class="custom-file mb-2">
-                        <input type="file" class="custom-file-input" id="uploadFile " name="uploadFile">
-                        <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-                    </div> -->
                                  
-                    <input type="text" class="form-control mb-2" name="caption">
+                    <textarea name='caption' class='form-control' rows='1'></textarea>
                     <input type="file" id="uploadFile " name="uploadFile">
                     <input type="submit" class="btn btn-primary mb-2" name='Submit' value="Post">
                 </form>   
@@ -92,11 +88,11 @@
                                 }       
                                 echo "</div>";                                  
                             echo "<img src='".$picture."'/ width='600px;' class='img-fluid'>";
-                            echo "<p class='card-text'>".$caption."</p>";
+                            echo "<p class='card-text mt-3'>".$caption."</p>";
                         echo "</div>";
                             echo "<ul class='list-group list-group-flush'>";
                                 echo "<li class='list-group-item'>";
-                                    echo "<form class='clearfix' action='functions.php?post_id=".$post_id."' method='post' id='comment_form'>
+                                    echo "<form class='clearfix' action='comment.php?post_id=".$post_id."' method='post' id='comment_form'>
                                     <textarea name='comment_text' id='comment_text' class='form-control' rows='1'></textarea>
                                     <button class='btn btn-primary btn-sm pull-right' name='submit_comment'>Submit comment</button>
                                     </form>";
@@ -110,7 +106,7 @@
                                     $comments=$row2['comment'];
                                     
                                     echo "<li class='list-group-item' id='comments-wrapper'>";
-                                        echo $commentUN;
+                                        echo "<a href='user.php?username=$commentUN'>".$commentUN."</a> ";
                                         echo $comments;
                                     echo "</li>";
                                 }

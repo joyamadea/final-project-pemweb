@@ -57,15 +57,21 @@
     </nav>
     <div class="container">
         
-        <div class="row justify-content-center">
-            <img src="<?php echo $image;?>" width="100px"style="border-radius: 100px;margin:10px;">
+        <div class="row mt-5 justify-content-center">
+                <img src="<?php if(empty($image)){ echo "images/profile/profile.png";}else{echo $image; }?>" width="100px"style="border-radius: 100px;margin:10px; text-align:right;">
         </div>
         <div class="row justify-content-center">
             <h3 style="text-align:center;"><?php echo $firstName." ".$lastName?></h3>
         </div>
         <div class="row justify-content-center">
-            <p style="text-align:center;"><?php echo $email?><br>
-                
+            <p style="text-align:center;"><?php echo $email?></p><br/>
+            <p style="text-align:center;"><?php echo $bio?></p><br/>
+            <?php 
+                if($sessionname==$username){
+                    echo "<p style='text-align:center;'><a href='edit.php?username=".$username."'>hi</a></p>";     
+                }
+            ?>
+            
         </div>
 
         <div class="row justify-content-center">
@@ -103,14 +109,33 @@
                         
                         echo "<div class='card-body'>";
                             echo "<div class='card-title'>";
+                            echo "<img width='50px' style='border-radius:100px;margin-right:13px;' src='";
+                            if(empty($image)){ 
+                                echo "images/profile/profile.png";}
+                                else{echo $image; };
+                                echo "'>";
                             echo "<a href='user.php?username=$uname'>".$uname."</a>";
                                 if($uname==$sessionname){
                                     echo "<button type='button' class='btn btn-danger float-right' data-toggle='modal' data-target='#delete'><i class='fa fa-trash'></i></button>";
                                 } 
                                 echo "</div>";                                  
                             echo "<img src='".$picture."'/ width='600px;' class='img-fluid'>";
-                            echo "<p>".$caption."</p>";
+                            echo "<p class='mt-3'>".$caption."</p>";
                         echo "</div>";
+                        echo "<ul class='list-group list-group-flush'>";
+                                
+                                $query3="SELECT * FROM comment WHERE post_id='$post_id' ORDER BY comm_id";
+                                $result3=$db->query($query3) or die($db->error);
+
+                                while($row2=$result3->fetch_assoc()){
+                                    $commentUN=$row2['username'];
+                                    $comments=$row2['comment'];
+                                    
+                                    echo "<li class='list-group-item' id='comments-wrapper'>";
+                                        echo "<a href='user.php?username=$commentUN'>".$commentUN."</a> ";
+                                        echo $comments;
+                                    echo "</li>";
+                                }
                     echo "</div>";
                 } 
             ?>
