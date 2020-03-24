@@ -78,13 +78,28 @@
                     $post_id=$row1['post_id'];
                     $uname=$row1['username'];
 
+                    $query = "SELECT * FROM users WHERE username='$uname'";
+                    $result = $db->query($query) or die($db->error);
+
                     echo "<div class='card mt-5 mb-3'>";
+                        while($row = $result->fetch_assoc()){
+                            $image=$row['profile_pic'];
                         
                         echo "<div class='card-body'>";
                             echo "<div class='card-title'>";
+                                echo "<img style='width:50px;
+                                height:50px;
+                                object-fit:cover;
+                                border-radius: 100px;
+                                margin-right:13px;' src='";
+                                if(empty($image)){ 
+                                    echo "images/profile/profile.png";}
+                                    else{echo $image; };
+                                    echo "'>";
+                        }
                                 echo "<a href='user.php?username=$uname'>".$uname."</a>";
                                 if($uname==$name){
-                                    echo "<a class='btn btn-danger float-right' href='delete.php?id=".$row1['post_id']."&image=".$row1['gambar']."' 
+                                    echo "<a class='btn btn-danger float-right' href='delete.php?id=".$post_id."&image=".$picture."' 
                             onclick='return confirm(\"Are you sure you want to delete this movie?\")'><i class='fa fa-trash'></i> Delete</a></td>";
                                     //echo "<button type='button' class='btn btn-danger float-right' data-toggle='modal' data-target='#delete'><i class='fa fa-trash'></i></button>";
                                 }       

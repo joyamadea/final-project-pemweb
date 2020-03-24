@@ -1,3 +1,12 @@
+.profilePic{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius: 100px;
+    margin:10px; 
+    text-align:right;
+}
+
 .btn {
     flex: 1 1 auto;
     text-align: center;
@@ -18,6 +27,13 @@
 .btn-2{
     background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
 }
+
+.btn-3{
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+
 .btn:hover {
     background-position: right center; /* change the direction of the change here */
-  }
+}
+
+

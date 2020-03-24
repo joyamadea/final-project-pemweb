@@ -58,17 +58,23 @@
     <div class="container">
         
         <div class="row mt-5 justify-content-center">
-                <img src="<?php if(empty($image)){ echo "images/profile/profile.png";}else{echo $image; }?>" width="100px"style="border-radius: 100px;margin:10px; text-align:right;">
+                <img src="<?php if(empty($image)){ echo "images/profile/profile.png";}else{echo $image; }?>" style="
+                width:100px;
+                height:100px;
+                object-fit:cover;
+                border-radius: 100px;
+                margin:10px; 
+                text-align:right;">
         </div>
         <div class="row justify-content-center">
-            <h3 style="text-align:center;"><?php echo $firstName." ".$lastName?></h3>
+            <h3 style="text-align:center;"><?php echo $firstName." ".$lastName?></h3><br/>
         </div>
         <div class="row justify-content-center">
-            <p style="text-align:center;"><?php echo $email?></p><br/>
-            <p style="text-align:center;"><?php echo $bio?></p><br/>
+            <p style="text-align:center;"><?php echo $email;?><br/>
+             <?php echo $bio;?><br/>
             <?php 
                 if($sessionname==$username){
-                    echo "<p style='text-align:center;'><a href='edit.php?username=".$username."'>hi</a></p>";     
+                    echo "<a href='edit.php?username=".$username."'>Edit Profile</a></p>";     
                 }
             ?>
             
@@ -108,13 +114,17 @@
                     echo "<div class='card mt-5 mb-3'>";
                         
                         echo "<div class='card-body'>";
-                            echo "<div class='card-title'>";
-                            echo "<img width='50px' style='border-radius:100px;margin-right:13px;' src='";
-                            if(empty($image)){ 
-                                echo "images/profile/profile.png";}
-                                else{echo $image; };
-                                echo "'>";
-                            echo "<a href='user.php?username=$uname'>".$uname."</a>";
+                        echo "<div class='card-title'>";
+                        echo "<img style='width:50px;
+                        height:50px;
+                        object-fit:cover;
+                        border-radius: 100px;
+                        margin-right:13px;' src='";
+                        if(empty($image)){ 
+                            echo "images/profile/profile.png";}
+                            else{echo $image; };
+                            echo "'>";
+                        echo "<a href='user.php?username=$uname'>".$uname."</a>";
                                 if($uname==$sessionname){
                                     echo "<a class='btn btn-danger float-right' href='delete.php?id=".$row1['post_id']."&image=".$row1['gambar']."' 
                             onclick='return confirm(\"Are you sure you want to delete this movie?\")'><i class='fa fa-trash'></i> Delete</a></td>";

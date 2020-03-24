@@ -14,13 +14,16 @@ if (isset($_POST['submit_comment'])) {
 		$name=$_SESSION['username'];
     }
 
-	$comment_text = $_POST['comment_text'];
-	
-	$comm_id=uniqid('comment');
-	$sql = "INSERT INTO comment VALUES ('$comm_id','$name','$post_id', '$comment_text')";
+    $comment_text = $_POST['comment_text'];
+    
+    if(!empty($comment_text)){
+        $comm_id=uniqid('comment');
+        $sql = "INSERT INTO comment VALUES ('$comm_id','$name','$post_id', '$comment_text')";
 
-	echo var_dump($sql);
-	$result = $db->query($sql);
+        $result = $db->query($sql);
+    }
+	
+	
 
 	header("location: home.php");
 	
