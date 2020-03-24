@@ -75,10 +75,7 @@
                         <br>
                     
                     <input type="password" placeholder="Password" class="form-control" name="password">
-
-                    <p style="color:red;"><?php echo $error?></p>
-                    <p style="color:red;"><?php echo $errorCaptcha?></p>
-
+                    
                     <?php                      
                     create_image();
                     display();
@@ -145,6 +142,9 @@
                         imagepng($image, "images/image" . $_SESSION['count'] . ".png");
                     }
                     ?>
+                    <p style="color:red;" align="center"><?php echo $error?></p>
+                    <p style="color:red;" align="center"><?php echo $errorCaptcha?></p>
+
                     <!-- Captcha Form -->
                 </form>
             </div>
