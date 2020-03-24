@@ -77,7 +77,7 @@
                     <input type="password" placeholder="Password" class="form-control" name="password">
                     
                     <?php                      
-                    create_image();
+                    //create_image();
                     display();
                     ?>
                     <?php
