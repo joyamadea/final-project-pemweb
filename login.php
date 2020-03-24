@@ -4,6 +4,7 @@
     $_SESSION['count'] = time();
     $image;
     $error=" ";
+    $errorCaptcha=" ";
     $flag = 5;
     if(isset($_POST['login']) && isset($_POST["flag"])){
         $username=$_POST['username'];
@@ -22,18 +23,20 @@
             $query->bind_result($username);
             $query->store_result();
             if($query->num_rows==1 && $flag == 1){
-                if($query->fetch() && $input == $_SESSION['captcha_string']){
+                if($input == $_SESSION['captcha_string']){
+                    if($query->fetch()){
                     session_start();
                     $_SESSION['username']=$username;
                     $_SESSION['loggedin']=true;
                     
                     header("location: home.php");
+                    }
+                }else{
+                    $errorCaptcha="Captcha anda salah";
                 }
             }
             else{
                 $error="Username or password do not match";
-                create_image();
-                display();
             }
             $query->close();
         }
@@ -74,6 +77,7 @@
                     <input type="password" placeholder="Password" class="form-control" name="password">
 
                     <p style="color:red;"><?php echo $error?></p>
+                    <p style="color:red;"><?php echo $errorCaptcha?></p>
 
                     <?php                      
                     create_image();
@@ -144,7 +148,6 @@
                     <!-- Captcha Form -->
                 </form>
             </div>
-
             <div class="modal-footer">
 				<div style="color:grey;" class="col-12 text-center">Don't have an account?  
                 <a href="register.php">Register</a></div>
