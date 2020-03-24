@@ -53,16 +53,16 @@
         
 
         <div class="row justify-content-center">
-            <div class="card mt-5">
+            <div class="card mt-5 col-lg-6 col-xs-12">
                 <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                     <?php require("add.php")?>
                     <label>New Post</label>
 
                     <textarea name='caption' class='form-control' rows='1'></textarea>
-                    <input type="file" id="uploadFile " name="uploadFile">
-                    <input type="submit" class="btn btn-primary mb-2" name='Submit' value="Post">
-                    <p><?php echo $errorFiletype?></p>
+                    <input type="file" id="uploadFile " class="mt-2" name="uploadFile">
+                    <input type="submit" class="btn btn-primary mb-2 mt-2 pull-right" name='Submit' value="Post">
+                
                 </form>   
                 </div>
             </div>   
@@ -116,7 +116,7 @@
                             <div class='col'>
                                 <textarea name='comment_text' id='comment_text' class='form-control' rows='1'></textarea>
                             </div>
-                            <div class='col-3'>
+                            <div class='col-3 pull-right'>
                                 <button class='btn btn-primary' name='submit_comment'>Comment</button>
                             </div>
                             </div>

@@ -99,19 +99,14 @@
                 
         ?>    
             <div class="row justify-content-center">
-                <div class="card">
+                <div class="card mt-5 col-lg-6 col-xs-12">
                     <div class="card-body">
                     <form action="add.php?username=<?php echo $username ?>" method="post" enctype="multipart/form-data">
                         <label>New Post</label>
-                        <!-- <div class="custom-file mb-2">
-                            <input type="file" class="custom-file-input" id="uploadFile " name="uploadFile">
-                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-                        </div> -->
-                        
-                        
+
                         <input type="text" class="form-control mb-2" name="caption">
-                        <input type="file" id="uploadFile " name="uploadFile">
-                        <input type="submit" class="btn btn-primary mb-2" name='Submit' value="Post">
+                        <input type="file" id="uploadFile " class="mt-2" name="uploadFile">
+                        <input type="submit" class="btn btn-primary mt-2 mb-2 pull-right" name='Submit' value="Post">
                     </form>   
                     </div>
                 </div>   
