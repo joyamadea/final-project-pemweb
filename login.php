@@ -4,6 +4,7 @@
     $_SESSION['count'] = time();
     $image;
     $error=" ";
+    $errorCaptcha=" ";
     $flag = 5;
     if(isset($_POST['login']) && isset($_POST["flag"])){
         $username=$_POST['username'];
@@ -22,18 +23,20 @@
             $query->bind_result($username);
             $query->store_result();
             if($query->num_rows==1 && $flag == 1){
-                if($query->fetch() && $input == $_SESSION['captcha_string']){
+                if($input == $_SESSION['captcha_string']){
+                    if($query->fetch()){
                     session_start();
                     $_SESSION['username']=$username;
                     $_SESSION['loggedin']=true;
                     
                     header("location: home.php");
+                    }
+                }else{
+                    $errorCaptcha="Captcha anda salah";
                 }
             }
             else{
                 $error="Username or password do not match";
-                create_image();
-                display();
             }
             $query->close();
         }
@@ -69,16 +72,10 @@
                 <form class="form-group" method="post" action="login.php">
                     <div class="form-group">
                         <input type="text" placeholder="Username" class="form-control" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username']:'';?>">
-                    </div>
+                        <br>
                     
                     <input type="password" placeholder="Password" class="form-control" name="password">
-
-                    <p style="color:red;"><?php echo $error?></p>
-
-                    <div class="form-group col-12 text-center">
-						<button type="submit" class="btn btn-2" name="login"><strong>Login</strong></button>
-					</div>
-                    <!-- Captcha Form -->
+                    
                     <?php                      
                     create_image();
                     display();
@@ -89,10 +86,10 @@
                     ?>
                         <div style="text-align:center;">
                             <div style="display:block;margin-bottom:20px;margin-top:20px;">
-                                <img src="image<?php echo $_SESSION['count'] ?>.png">
+                                <img src="images/image<?php echo $_SESSION['count'] ?>.png">
                             </div>
                             <form action=" <?php echo $_SERVER['PHP_SELF']; ?>" method="POST"
-                            / >
+                             >
                             <input type="text" name="input"/>
                             <input type="hidden" name="flag" value="1"/>
                             </form>
@@ -101,6 +98,13 @@
                                 <input type="submit" value="Refresh Captcha">
                             </form>
                         </div>
+                        
+                    <div class="form-group col-12 text-center">
+						<br>
+                        <button type="submit" class="btn btn-2" name="login"><strong>Login</strong></button>
+					</div>
+                    <!-- Captcha Form -->
+                    
                     <?php
                     }
                     function  create_image()
@@ -131,17 +135,19 @@
                         }
                         $_SESSION['captcha_string'] = $word;
 
-                        $images = glob("*.png");
+                        $images = glob("images/*.png");
                         foreach ($images as $image_to_delete) {
                             @unlink($image_to_delete);
                         }
-                        imagepng($image, "image" . $_SESSION['count'] . ".png");
+                        imagepng($image, "images/image" . $_SESSION['count'] . ".png");
                     }
                     ?>
+                    <p style="color:red;text-align:center;"><?php echo $error?></p>
+                    <p style="color:red;text-align:center;"><?php echo $errorCaptcha?></p>
+
                     <!-- Captcha Form -->
                 </form>
             </div>
-
             <div class="modal-footer">
 				<div style="color:grey;" class="col-12 text-center">Don't have an account?  
                 <a href="register.php">Register</a></div>
