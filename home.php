@@ -100,7 +100,7 @@
                                 echo "<a href='user.php?username=$uname'>".$uname."</a>";
                                 if($uname==$name){
                                     echo "<a class='btn btn-danger float-right' href='delete.php?id=".$post_id."&image=".$picture."' 
-                            onclick='return confirm(\"Are you sure you want to delete this movie?\")'><i class='fa fa-trash'></i> Delete</a></td>";
+                            onclick='return confirm(\"Are you sure you want to delete this post?\")'><i class='fa fa-trash'></i> Delete</a></td>";
                                     //echo "<button type='button' class='btn btn-danger float-right' data-toggle='modal' data-target='#delete'><i class='fa fa-trash'></i></button>";
                                 }       
                                 echo "</div>";                                  
