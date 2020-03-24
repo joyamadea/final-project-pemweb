@@ -69,16 +69,12 @@
                 <form class="form-group" method="post" action="login.php">
                     <div class="form-group">
                         <input type="text" placeholder="Username" class="form-control" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username']:'';?>">
-                    </div>
+                        <br>
                     
                     <input type="password" placeholder="Password" class="form-control" name="password">
 
                     <p style="color:red;"><?php echo $error?></p>
 
-                    <div class="form-group col-12 text-center">
-						<button type="submit" class="btn btn-2" name="login"><strong>Login</strong></button>
-					</div>
-                    <!-- Captcha Form -->
                     <?php                      
                     create_image();
                     display();
@@ -89,10 +85,10 @@
                     ?>
                         <div style="text-align:center;">
                             <div style="display:block;margin-bottom:20px;margin-top:20px;">
-                                <img src="image<?php echo $_SESSION['count'] ?>.png">
+                                <img src="images/image<?php echo $_SESSION['count'] ?>.png">
                             </div>
                             <form action=" <?php echo $_SERVER['PHP_SELF']; ?>" method="POST"
-                            / >
+                             >
                             <input type="text" name="input"/>
                             <input type="hidden" name="flag" value="1"/>
                             </form>
@@ -101,6 +97,13 @@
                                 <input type="submit" value="Refresh Captcha">
                             </form>
                         </div>
+                        
+                    <div class="form-group col-12 text-center">
+						<br>
+                        <button type="submit" class="btn btn-2" name="login"><strong>Login</strong></button>
+					</div>
+                    <!-- Captcha Form -->
+                    
                     <?php
                     }
                     function  create_image()
@@ -131,11 +134,11 @@
                         }
                         $_SESSION['captcha_string'] = $word;
 
-                        $images = glob("*.png");
+                        $images = glob("images/*.png");
                         foreach ($images as $image_to_delete) {
                             @unlink($image_to_delete);
                         }
-                        imagepng($image, "image" . $_SESSION['count'] . ".png");
+                        imagepng($image, "images/image" . $_SESSION['count'] . ".png");
                     }
                     ?>
                     <!-- Captcha Form -->
