@@ -94,15 +94,16 @@
                             <input type="hidden" name="flag" value="1"/>
                             </form>
 
-                            <form action=" <?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                                 <input type="submit" class="btn btn-1 mt-2" value="Refresh Captcha">
                             </form>
+                            <div class="form-group col-12 text-center">
+                                <br>
+                                <button type="submit" class="btn btn-2" name="login"><strong>Login</strong></button>
+                            </div>
                         </div>
                         
-                    <div class="form-group col-12 text-center">
-						<br>
-                        <button type="submit" class="btn btn-2" name="login"><strong>Login</strong></button>
-					</div>
+                    
                     <!-- Captcha Form -->
                     
                     <?php
