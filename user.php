@@ -46,9 +46,23 @@
             <li class="nav-item">
                 <a class="nav-link" href="home.php">Home </a>
             </li>
-            <li class="nav-item  active">
-                <a class="nav-link" href="#">Profile<span class="sr-only">(current)</span></a>
-            </li>
+            <?php 
+                if($sessionname==$username){
+                    ?>
+                <li class="nav-item  active">
+                    <a class="nav-link" href="#">Profile<span class="sr-only">(current)</span></a>
+                </li>
+            <?php
+                }
+                else{
+                    ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <?php
+                }
+            ?>
+            
             <li class="nav-item">
                 <a class="nav-link" href="logout.php">Logout</a>
             </li>
@@ -80,29 +94,37 @@
             
         </div>
 
-        <div class="row justify-content-center">
-            <div class="card">
-                <div class="card-body">
-                <form action="add.php?username=<?php echo $username ?>" method="post" enctype="multipart/form-data">
-                    <label>New Post</label>
-                    <!-- <div class="custom-file mb-2">
-                        <input type="file" class="custom-file-input" id="uploadFile " name="uploadFile">
-                        <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-                    </div> -->
-                    
-                    
-                    <input type="text" class="form-control mb-2" name="caption">
-                    <input type="file" id="uploadFile " name="uploadFile">
-                    <input type="submit" class="btn btn-primary mb-2" name='Submit' value="Post">
-                </form>   
-                </div>
-            </div>   
-        </div>
+        <?php 
+            if($sessionname==$username){
+                
+        ?>    
+            <div class="row justify-content-center">
+                <div class="card">
+                    <div class="card-body">
+                    <form action="add.php?username=<?php echo $username ?>" method="post" enctype="multipart/form-data">
+                        <label>New Post</label>
+                        <!-- <div class="custom-file mb-2">
+                            <input type="file" class="custom-file-input" id="uploadFile " name="uploadFile">
+                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                        </div> -->
+                        
+                        
+                        <input type="text" class="form-control mb-2" name="caption">
+                        <input type="file" id="uploadFile " name="uploadFile">
+                        <input type="submit" class="btn btn-primary mb-2" name='Submit' value="Post">
+                    </form>   
+                    </div>
+                </div>   
+            </div>
+        <?php
+            }
+        ?>
+       
 
         <div class="row justify-content-center">
             
             <?php 
-                $query2="SELECT * FROM post WHERE username='$username'";
+                $query2="SELECT * FROM post WHERE username='$username' ORDER BY post_id DESC";
                 $result2=$db->query($query2) or die($db->error);
             
                 while($row1=$result2->fetch_assoc()){
