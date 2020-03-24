@@ -40,7 +40,7 @@
     
     <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> -->
 </head>
-<body>
+<body style="background:url(https://gradients.design/public/uploads/files/v16.png)">
     <div class="modal-dialog modal-dialog-centered mt-5	mb-5" style="border:0px;">
 		<div class="modal-content" style="background-color: #f9f9f9;">
 			<div class="modal-header">

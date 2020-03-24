@@ -30,7 +30,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Home</a>
+        <a class="navbar-brand" href="#">Snapaholic</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -55,8 +55,8 @@
         <div class="row justify-content-center">
             <div class="card mt-5 col-lg-6 col-xs-12">
                 <div class="card-body">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <?php require("add.php")?>
+                <form action="add.php?username=<?php echo $name?>" method="post" enctype="multipart/form-data">
+                    
                     <label>New Post</label>
 
                     <textarea name='caption' class='form-control' rows='1'></textarea>

@@ -1,5 +1,4 @@
 <?php
-    $errorFiletype="";
     if(isset($_POST['Submit'])){
         include_once("config.php");
 
@@ -8,7 +7,7 @@
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         
-        
+        $name=$_GET['username'];
         $gambar=$target_file;
         $teks=htmlentities($_POST['caption']);
         $post_id=uniqid('post');
@@ -17,7 +16,6 @@
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
         && $imageFileType != "gif" ){
             $uploadOk=0;
-            $errorFiletype="Only JPG, JPEG, PNG & GIF files are allowed";
         }
 
         if(empty($teks)&&$uploadOk==1){
@@ -51,7 +49,6 @@
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
         && $imageFileType != "gif" ){
             $uploadOk=0;
-            $errorFiletype="Only JPG, JPEG, PNG & GIF files are allowed";
         }
 
         if(isset($bio) && $target_file!=$target_dir &&$uploadOk==1){
