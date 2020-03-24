@@ -1,6 +1,6 @@
 <?php
     include_once("config.php");
-
+    include('functions.php');
     session_start();
     if($_SESSION['loggedin']==true){
         $name=$_SESSION['username'];
@@ -94,13 +94,41 @@
                             echo "<img src='".$picture."'/ width='600px;' class='img-fluid'>";
                             echo "<p>".$caption."</p>";
                         echo "</div>";
-                    echo "</div>";
+
                 } 
             ?>
-                    
+                            <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-md-offset-3 comments-section">
+                                    <form class="clearfix" action="home.php" method="post" id="comment_form">
+                                        <textarea name="comment_text" id="comment_text" class="form-control" cols="30" rows="3"></textarea>
+                                        <button class="btn btn-primary btn-sm pull-right" id="submit_comment">Submit comment</button>
+                                    </form>
+                                <hr>
+                                <!-- comments wrapper -->
+                                <div id="comments-wrapper">
+                                <?php if (isset($comments)): ?>
+                                    <!-- Display comments -->
+                                    <?php foreach ($comments as $comment): ?>
+                                    <!-- comment -->
+                                    <div class="comment clearfix">
+                                        <img src="profile.png" alt="" class="profile_pic">
+                                        <div class="comment-details">
+                                            <span class="comment-name"><?php echo getUsernameById($comment['user_id']) ?></span>
+                                            <span class="comment-date"><?php echo date("F j, Y ", strtotime($comment["created_at"])); ?></span>
+                                            <p><?php echo $comment['comment']; ?></p>
+                                        </div>
+                                    </div>
+                                    <!-- // comment -->
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                                </div><!-- comments wrapper -->
+                            </div><!-- // all comments -->        
+                            </div>
+                        </div>
+                </div>            
         </div>
-    
-    </div>
+</div>
     
 
 

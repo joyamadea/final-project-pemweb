@@ -61,7 +61,6 @@
 			// tambah user ke database
 			$query="INSERT INTO users VALUES('$username', '$email','$password','$first_name', '$last_name', '$dob', '$gender','$profpic','$bio')";
 			$result=$conn->query($query);
-			echo var_dump($result);
 			header("refresh:3;url=login.php");
 		}
 	}
