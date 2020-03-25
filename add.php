@@ -46,19 +46,28 @@
         $bio=$_POST['bio'];
         $username=$_GET['username'];
 
+        $query2="SELECT * FROM users WHERE username='$username'";
+        $result2=$db->query($query2);
+        //echo var_dump($query2);
+        $res=$result2->fetch_assoc();
+        
+        $prevImage=$res['profile_pic'];
+
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
         && $imageFileType != "gif" ){
             $uploadOk=0;
         }
 
         if(isset($bio) && $target_file!=$target_dir &&$uploadOk==1){
+            
+            unlink($prevImage);
             $query = "UPDATE users SET profile_pic='$target_file', bio='$bio' WHERE username='$username'";
             move_uploaded_file($_FILES["uploadFile1"]["tmp_name"],$target_file);
             $result = $db->query($query);
         }
         else if(isset($bio) &&$uploadOk==1){
+            unlink($prevImage);
             $query = "UPDATE users SET bio='$bio' WHERE username='$username'";
-            move_uploaded_file($_FILES["uploadFile1"]["tmp_name"],$target_file);
             $result = $db->query($query);
         }
         else if(isset($_FILES["uploadFile1"]["name"])&&$uploadOk==1){

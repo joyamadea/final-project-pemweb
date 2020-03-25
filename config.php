@@ -13,7 +13,7 @@
 	// $password = "72a473f9";
 	// $db = mysqli_connect($host, $dbuname, $password, $dbname);
 
-	//infinityfree
+	//000webhost.com
 	$host = "localhost";
 	$dbuname = "id13033502_000webhost_snapaholic";
 	$dbname ="id13033502_000webhost_snapaholic";
