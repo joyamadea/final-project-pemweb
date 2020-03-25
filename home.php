@@ -42,9 +42,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="user.php?username=<?php echo $name?>">Profile</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="logout.php">Logout</a>
-            </li>
+            <?php 
+                if($_SESSION['loggedin']==true){
+                    ?>
+                     <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                <?php
+                }
+                
+            ?>
+
+           
             </ul>
         </div>
     </nav>

@@ -1,6 +1,11 @@
 <?php
 	date_default_timezone_set('Asia/Jakarta');
-	$conn = mysqli_connect("us-cdbr-iron-east-01.cleardb.net", "b56e908223081f", "72a473f9", "heroku_455d3e6ecc52e25");
+	$host = "localhost";
+	$dbuname = "id13033502_000webhost_snapaholic";
+	$dbname ="id13033502_000webhost_snapaholic";
+	$password = "utspemweb2020";
+	$conn = mysqli_connect($host, $dbuname, $password, $dbname);
+	// $conn = mysqli_connect("us-cdbr-iron-east-01.cleardb.net", "b56e908223081f", "72a473f9", "heroku_455d3e6ecc52e25");
 
 	global $conn;
 	$errorUsername=$errorEmail=$errorAge=$errorPassword=$errorConfirm=" ";

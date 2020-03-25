@@ -37,15 +37,19 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="home.php">Snapaholic</a>
+        <a class="navbar-brand" href="">Snapaholic</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <?php 
+                if($_SESSION['loggedin']==true){
+                    ?>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="home.php">Home </a>
             </li>
+            
             <?php 
                 if($sessionname==$username){
                     ?>
@@ -63,11 +67,28 @@
                 }
             ?>
             
-            <li class="nav-item">
-                <a class="nav-link" href="logout.php">Logout</a>
-            </li>
+            
+                     <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+               
             </ul>
         </div>
+        <?php
+                }
+                else if($_SESSION['loggedin']==false){
+                    ?>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login </a>
+                    </li>
+                    </ul>
+                </div>
+                
+                <?php
+                }
+            ?>
     </nav>
     <div class="container">
         

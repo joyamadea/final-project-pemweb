@@ -2,6 +2,8 @@
     include_once("config.php");
     session_start();
     $_SESSION['count'] = time();
+    $_SESSION['loggedin']=false;
+    $_SESSION['username']=null;
     $image;
     $error=" ";
     $errorCaptcha=" ";
@@ -25,7 +27,6 @@
             if($query->num_rows==1 && $flag == 1){
                 if($input == $_SESSION['captcha_string']){
                     if($query->fetch()){
-                    session_start();
                     $_SESSION['username']=$username;
                     $_SESSION['loggedin']=true;
                     
@@ -77,7 +78,7 @@
                     <input type="password" placeholder="Password" class="form-control" name="password">
                     
                     <?php                      
-                    //create_image();
+                    create_image();
                     display();
                     ?>
                     <?php
@@ -98,6 +99,7 @@
                                 <br>
                                 <button type="submit" class="btn btn-2" name="login"><strong>Login</strong></button>
                             </div>
+
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                                 <input type="submit" class="btn btn-1 mt-2" value="Refresh Captcha">
                             </form>

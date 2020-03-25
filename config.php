@@ -7,9 +7,16 @@
 	// $db = mysqli_connect($host, $dbuname, $password, $dbname);
 
 	//deploy ver
-	$host = "us-cdbr-iron-east-01.cleardb.net";
-	$dbuname = "b56e908223081f";
-	$dbname ="heroku_455d3e6ecc52e25";
-	$password = "72a473f9";
+	// $host = "us-cdbr-iron-east-01.cleardb.net";
+	// $dbuname = "b56e908223081f";
+	// $dbname ="heroku_455d3e6ecc52e25";
+	// $password = "72a473f9";
+	// $db = mysqli_connect($host, $dbuname, $password, $dbname);
+
+	//infinityfree
+	$host = "localhost";
+	$dbuname = "id13033502_000webhost_snapaholic";
+	$dbname ="id13033502_000webhost_snapaholic";
+	$password = "utspemweb2020";
 	$db = mysqli_connect($host, $dbuname, $password, $dbname);
 ?>
